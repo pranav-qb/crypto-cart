@@ -1,0 +1,30 @@
+.header-wrap{
+    height: 45px;
+    width: 100%;
+    background-color: #5fbd51;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // border-bottom: solid 3px #76e366;
+    color: #2e2e31;
+    
+    .org-section{
+        display: flex;
+        color: #2e2e31;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 25px;
+        width: 11%;
+        img{
+            width: 26px;
+            height: 26px;
+        }
+        h4{
+            margin-left: 15px;
+        }
+    }
+    p{
+        margin-right: 30px;
+        margin-bottom: 0px;
+    }
+}

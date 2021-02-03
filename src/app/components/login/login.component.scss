@@ -1,0 +1,99 @@
+.login-wrap{
+    height: 540px;
+    background-color: #2e2e31;
+    display: flex;
+    .left{
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+            width: 75%;
+            margin-top: -20%;
+            opacity: 0.4;
+        }
+    }
+    .right{
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .form-section{
+            width: 65%;
+            // height: 80%;
+            background-color: lighten($color: #2e2e31, $amount: 5);
+            .form-head{
+                display: flex;
+                height: 35px;
+                background: #5fbd51;
+                color: #000000;
+                .login-head,.signup-head{
+                    width: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .selected{
+                    border-bottom: solid 3px #ffffff;
+                    background-color: darken($color: #5fbd51, $amount: 10);
+                }
+            }
+            .form-body{
+                padding:40px;
+                padding-bottom: 15px;
+                input{
+                    color: #ffffff;
+                    width: 95%;
+                    height: 25px;
+                    background-color: #2e2e31;
+                    outline: none;
+                    border: none;
+                    margin-bottom: 15px;
+                    padding: 3px;
+                    padding-left: 10px;
+                    &:focus{
+                        background-color: lighten($color: #2e2e31, $amount: 0);
+                        border: none;
+                        outline: none;
+                    }
+                }
+            }
+            .form-footer{
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 30px;
+                div{
+                    padding:10px;
+                    border-radius: 3px;
+                    min-width: 75px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 30px;
+                    cursor: pointer;
+                    &:nth-child(1){
+                        background-color: #ffffff;
+                        margin-right: 10px;
+                    }
+                    &:nth-child(2){
+                        background-color: #5fbd51;
+                    }
+                }
+                .disabled{
+                    cursor:not-allowed;
+                    opacity: 0.5;
+                }
+                
+            }
+            p{
+                font-size: 12px;
+                /* padding: 0px 10px; */
+                display: flex;
+                justify-content: center;
+                margin: 0px;
+                color: #5fbd51;
+            }
+        }
+    }
+}

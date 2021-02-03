@@ -1,0 +1,41 @@
+<app-header></app-header>
+<div class="login-wrap">
+    <div class="left">
+        <img src="./assets/market-img.png">
+
+    </div>
+    <div class="right">
+        <div class="form-section">
+            <div class="form-head">
+                <div class="login-head" [ngClass]="{'selected' : tab ==='login'}" (click)="tab = 'login'">
+                    Login
+                </div>
+                <div class="signup-head" [ngClass]="{'selected' : tab ==='signup'}" (click)="tab = 'signup'">
+                    Sign up
+                </div>
+            </div>
+            <div class="form-body" *ngIf="tab === 'login'" >
+                <input placeholder="email" type="text" [(ngModel)]="loginData.email">
+                <input placeholder="password" type="password" [(ngModel)]="loginData.password">
+            </div>
+            <div class="form-body" *ngIf="tab === 'signup'">
+                <input placeholder="email" type="text" [(ngModel)]="signupData.email">
+                <input placeholder="username" type="text" [(ngModel)]="signupData.userName">
+                <input placeholder="password" type="password" [(ngModel)]="signupData.password">
+                <input placeholder="confirm password" type="password" [(ngModel)]="signupData.confirmpassword">
+            </div>
+            <p *ngIf="showError">{{errorMessage}}</p>
+            <div class="form-footer">
+                <div class="clear-btn" (click)="reset()">
+                    Reset
+                </div>
+                <div class="login-btn" *ngIf="tab === 'login'" [ngClass]="{disabled:isDisabled('login')}" (click)="login()">
+                    Login
+                </div>
+                <div class="login-btn" *ngIf="tab === 'signup'" [ngClass]="{disabled:isDisabled('signup')}" (click)="signup()">
+                    Sign up
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

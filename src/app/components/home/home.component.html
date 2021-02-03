@@ -1,0 +1,39 @@
+<app-header></app-header>
+<div class="home-wrap">
+    <div class="own-wrap">
+        <div class="add-row">
+            <h5>Own assets</h5>
+            <div class="green-btn" (click)="addAsset()">Add Asset</div>
+        </div>
+        
+        <div class="assets">
+            <div *ngFor="let asset of ownAssets">
+                {{asset.assetName}}fff
+            </div>
+        </div>
+    </div>
+    <div class="market-wrap">
+        <h5>Available assets</h5>
+        <div class="market-assets">
+
+        </div>
+    </div>
+</div>
+<ng-template #add let-modal class="add-popup">
+    <div class="add-popup">
+        <div class="modal-header">Add Asset</div>
+        <div class="modal-body">
+            <input placeholder="name" type="text" [(ngModel)]="newAsset.assetName">
+            <textarea rows="5" placeholder="description" type="text" [(ngModel)]="newAsset.description"></textarea>
+        </div>
+        <div class="modal-footer">
+            <div class="clear-btn" (click)="reset()">
+                Reset
+            </div>
+            <div class="green-btn" [ngClass]="{disabled:isDisabled()}" (click)="addNewAsset()">
+                Add
+            </div>
+        </div>
+    </div>
+
+</ng-template>

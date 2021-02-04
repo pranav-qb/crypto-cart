@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header [page]="'home'" ></app-header>
 <div class="home-wrap">
     <div class="own-wrap">
         <div class="add-row">
@@ -7,15 +7,32 @@
         </div>
         
         <div class="assets">
-            <div *ngFor="let asset of ownAssets">
-                {{asset.assetName}}fff
+            <div *ngFor="let asset of ownAssets" class="individual-asset">
+                <div class="top-row">
+                    <span>{{asset.assetName}}</span>
+                    <div *ngIf="!asset.forSale" class="sell-btn" (click)="openSellAsset(asset)">Sell</div>
+                    <div class="button-wrap" *ngIf="asset.forSale">
+                        <div  class="cancel-btn" (click)="withdrawSale(asset)" >Withdraw</div>
+                        <div class="sell-btn" (click)="openUpdateAssetPrice(asset)" >Update</div>
+                    </div>
+                    
+                </div>
+                <span class="forsale" *ngIf="asset.forSale">On sale for ${{asset.price}}</span>
+                <span>{{asset.description}}</span>
             </div>
         </div>
     </div>
     <div class="market-wrap">
         <h5>Available assets</h5>
         <div class="market-assets">
-
+            <div *ngFor="let asset of forSaleAssets" class="individual-asset">
+                <div class="top-row">
+                    <span>{{asset.assetName}}</span>
+                    <div class="sell-btn" (click)="openBuyAsset(asset)">Buy</div>
+                </div>
+                <span class="forsale" *ngIf="asset.forSale">For sale at ${{asset.price}}</span>
+                <span>{{asset.description}}</span>
+            </div>
         </div>
     </div>
 </div>
@@ -32,6 +49,60 @@
             </div>
             <div class="green-btn" [ngClass]="{disabled:isDisabled()}" (click)="addNewAsset()">
                 Add
+            </div>
+        </div>
+    </div>
+
+</ng-template>
+
+<ng-template #sell let-modal class="add-popup">
+    <div class="add-popup">
+        <div class="modal-header">Sell Asset</div>
+        <div class="modal-body">
+            <input placeholder="price" type="text" [(ngModel)]="assetPrice">
+        </div>
+        <div class="modal-footer">
+            <div class="clear-btn" (click)="cancel()">
+                cancel
+            </div>
+            <div class="green-btn" [ngClass]="{disabled:isDisabled()}" (click)="sellAsset()" [ngClass]="{'disabled':assetPrice ===''}">
+                confirm
+            </div>
+        </div>
+    </div>
+
+</ng-template>
+
+<ng-template #update let-modal class="add-popup">
+    <div class="add-popup">
+        <div class="modal-header">Update price</div>
+        <div class="modal-body">
+            <input placeholder="price" type="text" [(ngModel)]="assetPrice">
+        </div>
+        <div class="modal-footer">
+            <div class="clear-btn" (click)="cancel()">
+                cancel
+            </div>
+            <div class="green-btn" (click)="sellAsset()" [ngClass]="{'disabled':assetPrice ===''}">
+                Update
+            </div>
+        </div>
+    </div>
+
+</ng-template>
+
+<ng-template #buy let-modal class="add-popup">
+    <div class="add-popup">
+        <div class="modal-header">Buy Asset</div>
+        <div class="modal-body">
+            Are you sure to buy this asset?
+        </div>
+        <div class="modal-footer">
+            <div class="clear-btn" (click)="cancel()">
+                cancel
+            </div>
+            <div class="green-btn" (click)="buyAsset()">
+                Buy
             </div>
         </div>
     </div>

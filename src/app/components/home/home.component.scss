@@ -1,16 +1,100 @@
 .home-wrap{
     display: flex;
-    height: 600px;
+    height: calc(100% - 45px);
     .own-wrap{
         background-color: #2e2e31;
         width: 40%;
         .add-row{
             display: flex;
             justify-content: space-around;
-            align-items: center;
+            align-items: flex-end;
             height: 45px;
+            margin-bottom: 18px;
             h5{
                 color: #ffffff;
+            }
+        }
+        .assets{
+            height: 86%;
+            overflow: auto;
+            padding-left: 10px;
+            .individual-asset{
+                height: 80px;
+                background: lighten($color: #2e2e31, $amount: 5);
+                margin: 5px 10px;
+                color: #ffffff;
+                padding: 10px;
+                margin-left: 12px;
+                .top-row{
+                    display: flex;
+                    justify-content: space-between;
+                    span{
+                        font-size: 14px;
+                    }
+                    .button-wrap{
+                        display: flex;
+                        .sell-btn{
+                            padding:10px;
+                            border-radius: 3px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #5fbd51;
+                            cursor: pointer;
+                            color: #2e2e31;
+                            font-size: 12px;
+                            min-width: 50px;
+                            height: 20px;
+                        }
+                        .cancel-btn{
+                            padding:10px;
+                            border-radius: 3px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #ffffff;
+                            cursor: pointer;
+                            color: #2e2e31;
+                            font-size: 12px;
+                            min-width: 50px;
+                            height: 20px;
+                            margin-right: 10px;
+                        }
+                    }
+                    .sell-btn{
+                        padding:10px;
+                        border-radius: 3px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #5fbd51;
+                        cursor: pointer;
+                        color: #2e2e31;
+                        font-size: 12px;
+                        min-width: 50px;
+                        height: 20px;
+                    }
+                    .cancel-btn{
+                        padding:10px;
+                        border-radius: 3px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #ffffff;
+                        cursor: pointer;
+                        color: #2e2e31;
+                        font-size: 12px;
+                        min-width: 50px;
+                        height: 20px;
+                    }
+                }
+                span{
+                    font-size: 12px;
+                }
+                .forsale{
+                    color: #5fbd51;
+                    display: block;
+                }
             }
         }
         
@@ -21,6 +105,93 @@
         h5{
             color: #ffffff;
             padding-left: 10%;
+            margin-top: 12px;
+        }
+        .market-assets{
+            display: flex;
+            flex-wrap: wrap;
+            height: 86%;
+            overflow: auto;
+            padding-left: 10px;
+            .individual-asset{
+                height: 80px;
+                background:  #2e2e31;
+                margin: 5px 10px;
+                color: #ffffff;
+                padding: 10px;
+                margin-left: 12px;
+                width: 46%;
+                .top-row{
+                    display: flex;
+                    justify-content: space-between;
+                    span{
+                        font-size: 14px;
+                    }
+                    .button-wrap{
+                        display: flex;
+                        .sell-btn{
+                            padding:10px;
+                            border-radius: 3px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #5fbd51;
+                            cursor: pointer;
+                            color: #2e2e31;
+                            font-size: 12px;
+                            min-width: 50px;
+                            height: 20px;
+                        }
+                        .cancel-btn{
+                            padding:10px;
+                            border-radius: 3px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #ffffff;
+                            cursor: pointer;
+                            color: #2e2e31;
+                            font-size: 12px;
+                            min-width: 50px;
+                            height: 20px;
+                            margin-right: 10px;
+                        }
+                    }
+                    .sell-btn{
+                        padding:10px;
+                        border-radius: 3px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #5fbd51;
+                        cursor: pointer;
+                        color: #2e2e31;
+                        font-size: 12px;
+                        min-width: 50px;
+                        height: 20px;
+                    }
+                    .cancel-btn{
+                        padding:10px;
+                        border-radius: 3px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #ffffff;
+                        cursor: pointer;
+                        color: #2e2e31;
+                        font-size: 12px;
+                        min-width: 50px;
+                        height: 20px;
+                    }
+                }
+                span{
+                    font-size: 12px;
+                }
+                .forsale{
+                    color: #5fbd51;
+                    display: block;
+                }
+            }
         }
     }
 }
@@ -36,6 +207,7 @@
     background-color: #5fbd51;
     cursor: pointer;
     color: #2e2e31;
+    font-size: 13px;
 }
 .disabled{
     cursor: not-allowed;
@@ -57,7 +229,7 @@
         input, textarea{
             color: #ffffff;
             font-size: 12px;
-            width: 95%;
+            width: 99%;
             height: 30px;
             background-color: #2e2e31;
             outline: none;
@@ -88,6 +260,7 @@
     height: 30px;
     cursor: pointer;
     color: #2e2e31;
+    font-size: 13px;
     }
 }
 }

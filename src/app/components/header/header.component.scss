@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // border-bottom: solid 3px #76e366;
+     border-bottom: solid 1px #ffffff;
     color: #2e2e31;
     
     .org-section{
@@ -21,10 +21,12 @@
         }
         h4{
             margin-left: 15px;
+            margin-bottom: 0px;
         }
     }
     p{
         margin-right: 30px;
         margin-bottom: 0px;
+        cursor: pointer;
     }
 }

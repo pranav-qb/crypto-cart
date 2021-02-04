@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { AssetService } from 'src/app/services/asset.service';
 import * as uuid from 'uuid';
 
@@ -13,20 +15,53 @@ import * as uuid from 'uuid';
 export class HomeComponent implements OnInit {
 
   @ViewChild('add') add;
+  @ViewChild('sell') sell;
+  @ViewChild('update') update;
+  @ViewChild('buy') buy;
   user;
   newAsset ={assetName:'',description:'',forSale:false,price:0,email:''}
   ownAssets;
+  forSaleAssets;
+  assetSubscripton:Subscription;
+  assetPrice='';
+  activeAssetId;
 
-  constructor(private modalService:NgbModal,private assetService:AssetService) { }
+  constructor(private modalService:NgbModal,private assetService:AssetService,private router:Router) { }
 
   ngOnInit(): void {
     this.user = sessionStorage.getItem('email');
+    if(!this.user){
+      this.router.navigate(['login']);
+    }
     this.ownAssets = this.assetService.getOwnAssets(this.user);
+    this.forSaleAssets = this.assetService.getForSaleAssets(this.user);
+    this.assetSubscripton = this.assetService.assetSubject.subscribe((data)=>this.ownAssets = data)
     console.log(this.ownAssets)
   }
   addAsset(){
     this.newAsset ={assetName:'',description:'',forSale:false,price:0,email:this.user}
-    this.modalService.open(this.add,{size:'sm',backdrop:'static',centered:true})
+    this.modalService.open(this.add,{size:'md',backdrop:'static',centered:true})
+  }
+  openSellAsset(asset){
+    this.activeAssetId = asset.assetId;
+    this.modalService.open(this.sell,{size:'sm',backdrop:'static',centered:true})
+  }
+  openUpdateAssetPrice(asset){
+    this.activeAssetId = asset.assetId;
+    this.assetPrice = asset.price;
+    this.modalService.open(this.update,{size:'sm',backdrop:'static',centered:true})
+  }
+  openBuyAsset(asset){
+    this.activeAssetId = asset.assetId;
+    this.modalService.open(this.buy,{size:'sm',backdrop:'static',centered:true})
+  }
+  buyAsset(){
+    this.assetService.buyAsset(this.activeAssetId,this.user);
+    this.modalService.dismissAll();
+    this.forSaleAssets.splice(this.forSaleAssets.indexOf(d=>d.assetId === this.activeAssetId),1);
+  }
+  withdrawSale(asset){
+    this.assetService.withDrawSale(asset.assetId)
   }
   reset(){
     this.newAsset ={assetName:'',description:'',forSale:false,price:0,email:this.user}
@@ -43,5 +78,14 @@ export class HomeComponent implements OnInit {
     }
     return false;
   }
-
+  cancel(){
+    this.modalService.dismissAll();
+    this.assetPrice = '';
+  }
+  sellAsset(){
+    if(this.assetPrice ==='') return;
+  this.modalService.dismissAll();
+  this.assetService.sellAsset(this.activeAssetId,this.assetPrice);
+  this.assetPrice='';
+  }
 }

@@ -3,5 +3,9 @@
         <img src="/assets/cart-img.png">
         <h4>cryptocart</h4>
     </div>
-    <p *ngIf="page==='home'" (click)="logout();">logout</p>
+    <div *ngIf="page==='home'">
+        <p>Balance: ${{balance}}</p>
+        <p  (click)="logout();">logout</p>
+    </div>
+    
 </div>

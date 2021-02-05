@@ -88,12 +88,17 @@
                         height: 20px;
                     }
                 }
-                span{
+                .desc{
                     font-size: 12px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 100%;
                 }
                 .forsale{
                     color: #5fbd51;
                     display: block;
+                    font-size: 12px;
                 }
             }
         }
@@ -110,7 +115,7 @@
         .market-assets{
             display: flex;
             flex-wrap: wrap;
-            height: 86%;
+            max-height: 86%;
             overflow: auto;
             padding-left: 10px;
             .individual-asset{
@@ -184,13 +189,27 @@
                         height: 20px;
                     }
                 }
-                span{
+                .desc{
                     font-size: 12px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 100%;
                 }
-                .forsale{
-                    color: #5fbd51;
-                    display: block;
+                .green-wrap{
+                    display: flex;
+                    justify-content: space-between;
+                    .forsale{
+                        color: #5fbd51;
+                        display: block;
+                        font-size: 12px;
+                    }
+                    .owner{
+                        color: #ffffff;
+                        font-size: 12px;
+                    }
                 }
+                
             }
         }
     }
@@ -216,6 +235,7 @@
 .add-popup{
     background-color: lighten(#2e2e31,5);
     color: #ffffff;
+     position: relative;
     .modal-header{
         background-color: #5fbd51;
     color: #2e2e31;
@@ -263,4 +283,12 @@
     font-size: 13px;
     }
 }
+}
+
+.close-img{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 22px;
+    cursor: pointer;
 }

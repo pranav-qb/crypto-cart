@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AssetService } from 'src/app/services/asset.service';
+import { LoginService } from 'src/app/services/login.service';
 import * as uuid from 'uuid';
 
 
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('sell') sell;
   @ViewChild('update') update;
   @ViewChild('buy') buy;
+  @ViewChild('cancel') cancelBuy;
   user;
   newAsset ={assetName:'',description:'',forSale:false,price:0,email:''}
   ownAssets;
@@ -26,7 +28,7 @@ export class HomeComponent implements OnInit {
   assetPrice='';
   activeAssetId;
 
-  constructor(private modalService:NgbModal,private assetService:AssetService,private router:Router) { }
+  constructor(private modalService:NgbModal,private assetService:AssetService,private router:Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.user = sessionStorage.getItem('email');
@@ -36,7 +38,6 @@ export class HomeComponent implements OnInit {
     this.ownAssets = this.assetService.getOwnAssets(this.user);
     this.forSaleAssets = this.assetService.getForSaleAssets(this.user);
     this.assetSubscripton = this.assetService.assetSubject.subscribe((data)=>this.ownAssets = data)
-    console.log(this.ownAssets)
   }
   addAsset(){
     this.newAsset ={assetName:'',description:'',forSale:false,price:0,email:this.user}
@@ -53,6 +54,10 @@ export class HomeComponent implements OnInit {
   }
   openBuyAsset(asset){
     this.activeAssetId = asset.assetId;
+    if(asset.price > this.loginService.getBalance(this.user)){
+      this.modalService.open(this.cancelBuy,{size:'sm',backdrop:'static',centered:true})
+    }
+    else
     this.modalService.open(this.buy,{size:'sm',backdrop:'static',centered:true})
   }
   buyAsset(){
@@ -87,5 +92,8 @@ export class HomeComponent implements OnInit {
   this.modalService.dismissAll();
   this.assetService.sellAsset(this.activeAssetId,this.assetPrice);
   this.assetPrice='';
+  }
+  getUsername(email){
+    return this.loginService.getUsername(email)
   }
 }

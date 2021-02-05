@@ -18,7 +18,7 @@
                     
                 </div>
                 <span class="forsale" *ngIf="asset.forSale">On sale for ${{asset.price}}</span>
-                <span>{{asset.description}}</span>
+                <div class="desc">{{asset.description}}</div>
             </div>
         </div>
     </div>
@@ -30,14 +30,19 @@
                     <span>{{asset.assetName}}</span>
                     <div class="sell-btn" (click)="openBuyAsset(asset)">Buy</div>
                 </div>
-                <span class="forsale" *ngIf="asset.forSale">For sale at ${{asset.price}}</span>
-                <span>{{asset.description}}</span>
+                <div class="green-wrap">
+                    <span class="forsale" *ngIf="asset.forSale">For sale at ${{asset.price}}</span>
+                    <span class="owner" *ngIf="asset.forSale">Owner : {{getUsername(asset.email)}}</span>
+                </div>
+                
+                <div class="desc">{{asset.description}}</div>
             </div>
         </div>
     </div>
 </div>
 <ng-template #add let-modal class="add-popup">
     <div class="add-popup">
+        <img class="close-img" src="./assets/close-white.png" alt="close" (click)="modalService.dismissAll()">
         <div class="modal-header">Add Asset</div>
         <div class="modal-body">
             <input placeholder="name" type="text" [(ngModel)]="newAsset.assetName">
@@ -57,9 +62,10 @@
 
 <ng-template #sell let-modal class="add-popup">
     <div class="add-popup">
+        <img class="close-img" src="./assets/close-white.png" alt="close" (click)="modalService.dismissAll()">
         <div class="modal-header">Sell Asset</div>
         <div class="modal-body">
-            <input placeholder="price" type="text" [(ngModel)]="assetPrice">
+            <input placeholder="price in $" type="number" [(ngModel)]="assetPrice">
         </div>
         <div class="modal-footer">
             <div class="clear-btn" (click)="cancel()">
@@ -75,6 +81,7 @@
 
 <ng-template #update let-modal class="add-popup">
     <div class="add-popup">
+        <img class="close-img" src="./assets/close-white.png" alt="close" (click)="modalService.dismissAll()">
         <div class="modal-header">Update price</div>
         <div class="modal-body">
             <input placeholder="price" type="text" [(ngModel)]="assetPrice">
@@ -93,6 +100,7 @@
 
 <ng-template #buy let-modal class="add-popup">
     <div class="add-popup">
+        <img class="close-img" src="/assets/close-white.png" alt="close" (click)="modalService.dismissAll()">
         <div class="modal-header">Buy Asset</div>
         <div class="modal-body">
             Are you sure to buy this asset?
@@ -103,6 +111,22 @@
             </div>
             <div class="green-btn" (click)="buyAsset()">
                 Buy
+            </div>
+        </div>
+    </div>
+
+</ng-template>
+
+<ng-template #cancel let-modal class="add-popup">
+    <div class="add-popup">
+        <img class="close-img" src="/assets/close-white.png" alt="close" (click)="modalService.dismissAll()">
+        <div class="modal-header">Low balance</div>
+        <div class="modal-body">
+            You don't have balance to buy this asset
+        </div>
+        <div class="modal-footer">
+            <div class="green-btn" (click)="cancel()">
+                Close
             </div>
         </div>
     </div>
